@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="text-center">
+          <h1>Profile</h1>
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+
+         <!-- Full Name -->
+
+          <div class="mb-3">
+            <label for="name">Full Name</label>
+            <input class="form-control"
+              name="name"
+              type="text"
+              placeholder="Enter Name"
+              #nameId="ngModel"
+              [ngClass]="{ 'is-invalid': submitted && nameId.invalid }" 
+              [(ngModel)]="info.Name" 
+              [pattern]="namePattern"required>
+
+              <div class="error-msg" 
+                *ngIf="submitted && nameId.errors?.['required']">
+                  Name is Required!
+              </div>
+              <div class="error-msg" 
+                *ngIf="submitted && nameId.errors?.['pattern']">
+                 Enter a valid Name!
+              </div>
+          </div>
+
+         <!-- Gender -->
+
+          <div class="mb-3">
+            <div class="input-group">
+              <div class="gender">
+                <label for="gender" class="mx-2">Geneder :</label>
+
+                <input type="radio"
+                 value="M" 
+                 name="gender" 
+                 #genId="ngModel" 
+                 [(ngModel)]="info.Gender" required> Male
+
+                <input type="radio" 
+                 value="F" 
+                 name="gender"
+                 #genId="ngModel" 
+                 [(ngModel)]="info.Gender" required> Female
+
+                    <div class="error-msg" 
+                      *ngIf="submitted && genId.errors?.['required']">
+                        Gender is Required!
+                    </div>
+               </div>
+            </div>
+          </div>
+
+         <!-- Date Of Birth -->
+
+          <div class="mb-3">
+            <label for="name">Date Of Birth</label>
+            <div class="input-group">
+              <input class="form-control" 
+                type="date"
+                name="Date Of Birth" 
+                #dobId="ngModel"
+                [ngClass]="{ 'is-invalid': submitted && dobId.invalid }" 
+                [(ngModel)]="info.DateOfBirth"
+                ngbDatepickerId="ngbDatepicker" required>
+            </div>
+            
+            <div class="error-msg"
+               *ngIf="submitted && dobId.errors?.['required']">
+              Date Of Birth is Required!
+            </div>
+          </div>
+
+         <!-- Milarity Status -->
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label for="milarity">Milarity Status</label>
+              <select class="form-control"
+                name="milarity"
+                [disabled]="info.Gender=='F'" 
+                #milarityId="ngModel"
+                [ngClass]="{ 'is-invalid': submitted && milarityId.invalid }" 
+                [(ngModel)]="info.MilarityStatuses" required>
+                <option *ngFor="let status of milarityStatuses" [value]="status.Name">{{status.Name}}</option>
+              </select>
+
+              <div class="error-msg" 
+                *ngIf="submitted && milarityId.errors?.['required']">
+                Milarity Status is Required!
+              </div>
+            </div>
+          </div>
+
+         <!-- Save Button -->
+
+          <div class="mb-3 text-right">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

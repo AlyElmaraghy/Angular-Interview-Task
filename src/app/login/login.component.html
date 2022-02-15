@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h1>Login</h1>
+                </div>
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+
+                    <!-- Email -->
+
+                    <div class="mb-3">
+                        <label for="email"> Email</label>
+                        <input class="form-control" 
+                            type="text" 
+                            placeholder="Enter Email" 
+                            #emailId="ngModel"
+                            [ngClass]="{ 'is-invalid': submitted && emailId.invalid }" 
+                            [(ngModel)]="acc.email" name="email"
+                            [pattern]="emailPattern" required>
+
+                        <div class="error-msg" 
+                           *ngIf="submitted && emailId.errors?.['required']">
+                             Email Address is Required!
+                        </div>
+
+                        <div class="error-msg" 
+                           *ngIf="submitted && emailId.errors?.['pattern']">
+                             Enter a valid Email Address
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input class="form-control"
+                            type="password" 
+                            name="password"
+                            placeholder="Enter password"
+                            #passwordId="ngModel" 
+                            [ngClass]="{ 'is-invalid': submitted && passwordId.invalid }"
+                            [(ngModel)]="acc.password"
+                            [pattern]="passwordPattern" required>
+
+                        <div class="error-msg" 
+                            *ngIf="submitted && passwordId.errors?.['required']">
+                             Password is Required!
+                        </div>
+
+                        <div class="error-msg"
+                            *ngIf="submitted && passwordId.errors?.['pattern']">
+                             Password lenght should be 8-16 characters and contain both number,letters and special
+                             characters!
+                        </div>
+                    </div>
+
+                    <!-- Login Button -->
+
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
